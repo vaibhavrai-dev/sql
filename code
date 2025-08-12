@@ -1,0 +1,44 @@
+-- Create Database
+CREATE DATABASE employee_management;
+USE employee_management;
+
+-- Create Employee Table
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    dob DATE NOT NULL,
+    position VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL,
+    hire_date DATE NOT NULL
+);
+
+-- Insert Sample Employees
+INSERT INTO employees (first_name, last_name, gender, dob, position, department, salary, hire_date) VALUES
+('Vaibhav', 'Rai', 'Male', '2000-05-15', 'Software Engineer', 'IT', 60000.00, '2024-01-10'),
+('Anjali', 'Sharma', 'Female', '1998-09-20', 'HR Manager', 'Human Resources', 55000.00, '2023-08-01'),
+('Ravi', 'Kumar', 'Male', '1995-12-05', 'Accountant', 'Finance', 45000.00, '2022-03-18'),
+('Priya', 'Singh', 'Female', '1999-04-25', 'Marketing Executive', 'Marketing', 40000.00, '2024-05-12');
+
+-- Fetch all employees
+SELECT * FROM employees;
+
+-- Find employees by department
+SELECT first_name, last_name, position FROM employees WHERE department = 'IT';
+
+-- Increase salary of IT department by 10%
+UPDATE employees SET salary = salary * 1.10 WHERE department = 'IT';
+
+-- Delete employees with salary less than 40000
+DELETE FROM employees WHERE salary < 40000;
+
+-- Count total employees
+SELECT COUNT(*) AS total_employees FROM employees;
+
+-- Get highest paid employee
+SELECT first_name, last_name, salary FROM employees ORDER BY salary DESC LIMIT 1;
+
+-- Employees hired in 2024
+SELECT first_name, last_name, hire_date FROM employees WHERE YEAR(hire_date) = 2024;
